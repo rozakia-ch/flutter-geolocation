@@ -15,3 +15,11 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # flutter-geolocation
+Does not work on android 9 or higher
+
+Package used
+- bloc: ^7.0.0
+- flutter_bloc: ^7.0.0
+- geolocator: ^7.0.3
+- http: ^0.13.1
+- platform_device_id: ^1.0.1
