@@ -11,35 +11,34 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<PositionItem> positionItems = <PositionItem>[];
-    return BlocListener<GeolocationCubit, GeolocationState>(
-      listener: (context, state) {
-        if (state is GeolocationLoaded) {
-          print(state.position.toString());
-          positionItems.add(PositionItem(
-              PositionItemType.position, state.position.toString()));
-        }
-      },
-      child: Scaffold(
-        drawer: DrawerApp(),
-        appBar: AppBar(
-          title: Text("Geolocator BLOC"),
-        ),
-        body: ListView.builder(
-          itemCount: positionItems.length,
-          itemBuilder: (context, index) {
-            final positionItem = positionItems[index];
-            print(positionItem);
-            return Card(
-              child: ListTile(
-                title: Text(
-                  positionItem.displayValue,
-                  style: TextStyle(color: Colors.black),
+    List<PositionItem> positionItems = <PositionItem>[];
+    return Scaffold(
+      backgroundColor: Colors.grey.shade300,
+      drawer: DrawerApp(),
+      appBar: AppBar(
+        title: Text("Geolocator BLOC"),
+      ),
+      body: BlocBuilder<GeolocationCubit, GeolocationState>(
+        builder: (context, state) {
+          if (state is GeolocationLoaded) {
+            positionItems.add(PositionItem(
+                PositionItemType.position, state.position.toString()));
+          }
+          return ListView.builder(
+            itemCount: positionItems.length,
+            itemBuilder: (context, index) {
+              final positionItem = positionItems[index];
+              return Card(
+                child: ListTile(
+                  title: Text(
+                    positionItem.displayValue,
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
-              ),
-            );
-          },
-        ),
+              );
+            },
+          );
+        },
       ),
     );
   }
